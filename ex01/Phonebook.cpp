@@ -6,7 +6,7 @@
 /*   By: kahmada <kahmada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 15:45:42 by kahmada           #+#    #+#             */
-/*   Updated: 2024/12/07 20:55:04 by kahmada          ###   ########.fr       */
+/*   Updated: 2025/01/01 13:07:44 by kahmada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ PhoneBook::PhoneBook()  {
 std::string    read_line(std::string str, std::string name)
 {
     if (getline(std::cin, str).eof())
-        exit(1);
+        return "";
     while (str.empty() || just_spaces(str))
     {
         std::cout << "Contact cannot have any empty field." << std::endl << name;
         if (getline(std::cin, str).eof())
-            exit(1);
+            return "";
     }
     return (str);
 }
@@ -49,25 +49,34 @@ void PhoneBook::searchContacts()
 
     for (int i = 0; i < 8; i++)
     {
-            contacts[i].displaySummary(i);
+        contacts[i].displaySummary(i);
     }
+
     std::cout << "Enter an index to view details: ";
     std::string input;
     std::getline(std::cin, input);
+
     if (std::cin.eof())
-        exit(1);
+        return;
+
     if (input.empty() || just_spaces(input))
-    {
-         std::cerr << "Invalid index!\n";
-         return ;
-    }
-    if (input[0] < '0' || input[0] > '9' || input.length() > 1)
     {
         std::cerr << "Invalid index!\n";
         return;
     }
-    int index = std::stoi(input);
-    if (index < 0 || index >= 8 || contacts[index].isEmpty())
+
+    if (input.length() > 1 || input[0] < '0' || input[0] > '9') // Validate input is a single digit
+    {
+        std::cerr << "Invalid index!\n";
+        return;
+    }
+
+    // Convert string to integer using stringstream
+    int index = -1;
+    std::stringstream ss(input);
+    ss >> index;
+
+    if (ss.fail() || index < 0 || index >= 8 || contacts[index].isEmpty())
         std::cerr << "Invalid index!\n";
     else
         contacts[index].displayDetails();

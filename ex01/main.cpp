@@ -6,7 +6,7 @@
 /*   By: kahmada <kahmada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:11:38 by kahmada           #+#    #+#             */
-/*   Updated: 2024/12/07 16:39:18 by kahmada          ###   ########.fr       */
+/*   Updated: 2025/01/01 13:01:18 by kahmada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main()
     while (1)
     {
         std::cout << "Enter a command (ADD, SEARCH, EXIT): ";
-        std::getline(std::cin, command);
+        getline(std::cin, command);
         if (std::cin.eof())
             break ;
         if (command == "ADD")
