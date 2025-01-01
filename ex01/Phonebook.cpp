@@ -6,7 +6,7 @@
 /*   By: kahmada <kahmada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 15:45:42 by kahmada           #+#    #+#             */
-/*   Updated: 2025/01/01 13:07:44 by kahmada          ###   ########.fr       */
+/*   Updated: 2025/01/01 13:09:54 by kahmada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,19 +65,19 @@ void PhoneBook::searchContacts()
         return;
     }
 
-    if (input.length() > 1 || input[0] < '0' || input[0] > '9') // Validate input is a single digit
+    // Ensure input is a single digit
+    if (input.length() > 1 || input[0] < '0' || input[0] > '9')
     {
         std::cerr << "Invalid index!\n";
         return;
     }
 
-    // Convert string to integer using stringstream
-    int index = -1;
-    std::stringstream ss(input);
-    ss >> index;
+    // Convert string to integer manually
+    int index = input[0] - '0';
 
-    if (ss.fail() || index < 0 || index >= 8 || contacts[index].isEmpty())
+    if (index < 0 || index >= 8 || contacts[index].isEmpty())
         std::cerr << "Invalid index!\n";
     else
         contacts[index].displayDetails();
 }
+
